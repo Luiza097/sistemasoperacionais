@@ -56,19 +56,24 @@ void gerar_e_salvar_matriz(int n, int m, const char *nome_arquivo) {
 }
 
 int main(int argc, char *argv[]) {
-    // Verifica se a quantidade de argumentos está correta
-    if (argc != 5) {
-        printf("Uso: %s n1 m1 n2 m2\n", argv[0]);
+    // Agora o programa espera 6 argumentos (4 para dimensoes + 2 para nomes de arquivos)
+    if (argc != 7) {
+        printf("Uso: %s n1 m1 n2 m2 arquivo_saida_1 arquivo_saida_2\n", argv[0]);
         return 1;
     }
 
-    // Converte os argumentos da linha de comando para inteiros
+    // Converte os argumentos das dimensoes para inteiros
     int n1 = atoi(argv[1]);
     int m1 = atoi(argv[2]);
     int n2 = atoi(argv[3]);
     int m2 = atoi(argv[4]);
 
-    // Verifica se as dimensões são válidas
+    // O arquivo de saida 1 e o argumento argv[5]
+    // O arquivo de saida 2 e o argumento argv[6]
+    const char *nome_arquivo1 = argv[5];
+    const char *nome_arquivo2 = argv[6];
+
+    // Verifica se as dimensoes sao validas
     if (m1 != n2) {
         printf("Erro: O número de colunas da Matriz 1 deve ser igual ao número de linhas da Matriz 2 para a multiplicação.\n");
         return 1;
@@ -77,11 +82,11 @@ int main(int argc, char *argv[]) {
     // Semeia o gerador de números aleatórios com a hora atual
     srand(time(NULL));
 
-    // Gera e salva a primeira matriz no arquivo M1.txt
-    gerar_e_salvar_matriz(n1, m1, "M1.txt");
+    // Gera e salva a primeira matriz com o nome do arquivo fornecido
+    gerar_e_salvar_matriz(n1, m1, nome_arquivo1);
 
-    // Gera e salva a segunda matriz no arquivo M2.txt
-    gerar_e_salvar_matriz(n2, m2, "M2.txt");
+    // Gera e salva a segunda matriz com o nome do arquivo fornecido
+    gerar_e_salvar_matriz(n2, m2, nome_arquivo2);
 
     return 0;
 }
